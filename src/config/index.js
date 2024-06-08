@@ -10,6 +10,10 @@ const getConfig = () => {
       PORT: process.env.PORT,
       ENV: process.env.ENV,
     },
+    redis: {
+      HOST : process.env.REDIS_HOST,
+      PORT: process.env.REDIS_PORT
+    }
   });
 };
 
