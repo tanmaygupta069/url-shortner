@@ -16,7 +16,7 @@ const encodeUrlController = (req, res) => {
   }
   console.log(`encoded url for ${req.body.url} is ${result}`);
 
-  res.status(200).json({
+  return res.status(200).json({
     originalUrl: req.body.url,
     shortUrl: result,
   });
