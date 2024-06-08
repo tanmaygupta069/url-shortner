@@ -1,3 +1,8 @@
+/**
+ * 
+ * @param {Number} uptimeInSeconds number of seconds 
+ * @returns fomatted readable string
+ */
 const formatUptime = (uptimeInSeconds) => {
   const days = Math.floor(uptimeInSeconds / (3600 * 24));
   const hours = Math.floor((uptimeInSeconds % (3600 * 24)) / 3600);

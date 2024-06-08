@@ -1,12 +1,16 @@
-require('dotenv').config();
+require("dotenv").config();
+const { environments } = require("../constants");
 
-const config = {
-    server:{
-        PORT : process.env.PORT,
-        ENV : process.env.ENV
+const getConfig = () => {
+  if (environments[process.env.ENV] == undefined) {
+    throw new Error(`invalid env: ${process.env.ENV}`);
+  }
+  return Object.freeze({
+    server: {
+      PORT: process.env.PORT,
+      ENV: process.env.ENV,
     },
+  });
+};
 
-}
-
-
-module.exports = config;
+module.exports = getConfig();
