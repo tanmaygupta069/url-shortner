@@ -13,7 +13,7 @@ const getConfig = () => {
     redis: {
       HOST : process.env.REDIS_HOST,
       PORT: process.env.REDIS_PORT
-    }
+    },
   });
 };
 
