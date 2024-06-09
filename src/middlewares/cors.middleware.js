@@ -1,12 +1,12 @@
 const cors = require("cors");
 const {
   getAllowedOrigins,
-  getAllowedOrigins,
+  getAllowedMethods,
 } = require("../constants/cors.constants");
 
 const corsOptions = {
   origin: getAllowedOrigins(),
-  methods: getAllowedOrigins(),
+  methods: getAllowedMethods(),
 };
 
 module.exports = cors(corsOptions);

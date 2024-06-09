@@ -42,6 +42,10 @@ A simple URL shortening service built with Node.js. This project demonstrates th
     # redis config
     REDIS_HOST = ''
     REDIS_PORT = 
+
+    # rate limitng config
+    ENCODE_API_LIMIT_PER_MIN = 
+    DECODE_API_LIMIT_PER_MIN = 
    ```
 
 
