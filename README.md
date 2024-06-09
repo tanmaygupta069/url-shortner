@@ -9,14 +9,6 @@ A simple URL shortening service built with Node.js. This project demonstrates th
 - Blacklist certain URLs to prevent shortening
 - Transaction based conversion using redis
 
-## Table of Contents
-
-- [Installation](#installation)
-- [Usage](#usage)
-- [Project Structure](#project-structure)
-- [Middlewares](#middlewares)
-- [Contributing](#contributing)
-- [License](#license)
 
 ## Dependencies Used
 
@@ -28,6 +20,17 @@ A simple URL shortening service built with Node.js. This project demonstrates th
    "validator": "^13.12.0"
    "nodemon" : "^3.1.3"
    ```
+
+
+## Table of Contents
+
+- [Installation](#installation)
+- [Usage](#usage)
+- [Project Structure](#project-structure)
+- [Middlewares](#middlewares)
+- [Contributing](#contributing)
+- [License](#license)
+
 
 ## Installation
 
