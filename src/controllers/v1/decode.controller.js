@@ -1,25 +1,36 @@
 const decodeUrl = require("../../services/v1/decode.service");
 const { isValidUrl } = require("../../validators/url.validators");
+const { getFailurePayload } = require("../../utils/response.utils");
+const { server } = require("../../config");
 
-const decodeUrlController = (req, res) => {
-  console.log(`controller called to decode url: ${req.body.url}`);
-  if (!isValidUrl(req.body.url)) {
-    res.status(400).json({
-      message: `invalid url: ${req.body.url}`,
+const decodeUrlController = async (req, res) => {
+  const shortUrl = server.DOMAIN_URL + req.params["id"];
+  console.log(shortUrl);
+  console.log(`controller called to decode url: ${shortUrl}`);
+
+  if (!isValidUrl(shortUrl)) {
+    return res.status(400).json({
+      message: `invalid url: ${shortUrl}`,
     });
   }
-
-  const { result, error } = decodeUrl(req.body.url);
-
-  if (error) {
-    return res.status(error.statusCode).json(error.payload);
+  let result;
+  try {
+    result = await decodeUrl(shortUrl);
+  } catch (error) {
+    return res
+      .status(500)
+      .json(getFailurePayload("something went wrong, please try again later"));
   }
-  console.log(`decoded url for ${req.body.url} is ${result}`);
 
-  return res.status(200).json({
-    originalUrl: result,
-    shortUrl: req.body.url,
-  });
+  console.log(`decoded url for ${shortUrl} is ${result}`);
+
+  console.log(`redirecting to ${result}...`);
+  return res.redirect(301,result)
+  // return res.status(200).json({
+  //   originalUrl: result,
+  //   shortUrl: req.body.url,
+  // });
+  // return;
 };
 
 module.exports = decodeUrlController;

@@ -1,4 +1,4 @@
-const { rateLimit } = require("../../config");
+const { rateLimit, server } = require("../../config");
 const express = require("express");
 const encodeUrlController = require("../../controllers/v1/encode.controller");
 const decodeUrlController = require("../../controllers/v1/decode.controller");
@@ -19,12 +19,6 @@ v1Router.post(
   encodeUrlController
 );
 
-v1Router.post(
-  "/decode",
-  rateLimitMiddelware({
-    limit: rateLimit.DECODE_API_LIMIT_PER_MIN,
-  }),
-  decodeUrlController
-);
+
 
 module.exports = v1Router;

@@ -1,19 +1,39 @@
 const encodeUrl = require("../../services/v1/encode.service");
-const { isValidUrl } = require("../../validators/url.validators");
+const {
+  isValidUrl,
+  stringIsAValidUrl,
+} = require("../../validators/url.validators");
+const { getFailurePayload } = require("../../utils/response.utils");
+const { getShortUrl } = require("../../services/redis");
 
-const encodeUrlController = (req, res) => {
+const encodeUrlController = async (req, res) => {
   console.log(`controller called to encode url: ${req.body.url}`);
+
   if (!isValidUrl(req.body.url)) {
-    res.status(400).json({
+    return res.status(400).json({
       message: `invalid url: ${req.body.url}`,
     });
   }
 
-  const { result, error } = encodeUrl(req.body.url);
-
-  if (error) {
-    return res.status(error.statusCode).json(error.payload);
+  let result = await getShortUrl(req.body.url);
+  if (result) {
+    return res.status(200).json({
+      originalUrl: req.body.url,
+      shortUrl: result,
+    });
   }
+  try {
+    result = await encodeUrl(req.body.url);
+  } catch (error) {
+    return res
+      .status(500)
+      .json(
+        getFailurePayload(
+          "something went wrong while encoding, please try again later"
+        )
+      );
+  }
+
   console.log(`encoded url for ${req.body.url} is ${result}`);
 
   return res.status(200).json({

@@ -9,15 +9,19 @@ const getConfig = () => {
     server: {
       PORT: process.env.PORT,
       ENV: process.env.ENV,
+      DOMAIN_URL: process.env.DOMAIN_URL,
     },
     redis: {
-      HOST : process.env.REDIS_HOST,
-      PORT: process.env.REDIS_PORT
+      HOST: process.env.REDIS_HOST,
+      PORT: process.env.REDIS_PORT,
+      USER: process.env.REDIS_USER,
+      PASSWORD: process.env.REDIS_PASSWORD,
     },
-    rateLimit:{
+    rateLimit: {
       ENCODE_API_LIMIT_PER_MIN: process.env.ENCODE_API_LIMIT_PER_MIN,
-      DECODE_API_LIMIT_PER_MIN: process.env.DECODE_API_LIMIT_PER_MIN
-    }
+      DECODE_API_LIMIT_PER_MIN: process.env.DECODE_API_LIMIT_PER_MIN,
+      STANDARD_HEADERS : process.env.STANDARD_HEADERS
+    },
   });
 };
 
